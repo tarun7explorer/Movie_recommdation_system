@@ -8,7 +8,6 @@ This system helps to select a movie based on your choice depending  on the ratin
 import pandas as pd
 
 
-
 # Check the head of the data
 df.head()
  #Check out all the movies and their respective IDs
@@ -16,9 +15,6 @@ movie_titles = pd.read_csv('https://media.geeksforgeeks.org/wp-content/uploads/M
 movie_titles.head()
 data = pd.merge(df, movie_titles, on='item_id')
 data.head()
-
-# Calculating mean rating of all movies
-data.groupby('title')['rating'].mean().sort_values(ascending=False).head()
 
 # Calculating count rating of all movies
 data.groupby('title')['rating'].count().sort_values(ascending=False).head()
@@ -43,11 +39,6 @@ moviemat = data.pivot_table(index ='user_id',
             columns ='title', values ='rating')
 moviemat.head()
 ratings.sort_values('num of ratings', ascending = False).head(10)
-
-# analysing correlation with similar movies
-starwars_user_ratings = moviemat['Star Wars (1977)']
-liarliar_user_ratings = moviemat['Liar Liar (1997)']
-starwars_user_ratings.head()
 
 # analysing correlation with similar movies
 similar_to_starwars = moviemat.corrwith(starwars_user_ratings)
